@@ -72,7 +72,7 @@ const DetailsPage = () => {
     }
 
     const calculateRate = () => {
-        
+
 
     }
 
@@ -188,9 +188,6 @@ const DetailsPage = () => {
                         </div>
 
                     </div>
-
-
-
 
                 </div>
 
