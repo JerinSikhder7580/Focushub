@@ -200,6 +200,7 @@ export default function AddRoomsPage() {
                                     <input
                                         type="checkbox"
                                         checked={selectedAmenities.includes(item)}
+
                                         onChange={() => handleCheckbox(item)}
                                         className="h-4 w-4 accent-cyan-400"
                                     />
