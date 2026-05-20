@@ -213,7 +213,6 @@ const AllRoomsPage = () => {
                         }
                     </div>
 
-                    <div></div>
                 </div>
 
 
