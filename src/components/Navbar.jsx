@@ -26,19 +26,19 @@ const Navbar = () => {
         {
             user ?
                 <>
-                    <li><Link href={'/'}>Home</Link></li>
-                    <li><Link href={'/rooms'}>Rooms</Link></li>
-                    <li><Link href={'/add-rooms'}>Add Rooms</Link></li>
-                    <li><Link href={'/my-listing'}>My Listing</Link></li>
-                    <li><Link href={'/my-bookings'}>My Bookings</Link></li>
+                    <li><Link href={'/'} className="font-semibold">Home</Link></li>
+                    <li><Link href={'/rooms'} className="font-semibold" >Rooms</Link></li>
+                    <li><Link href={'/add-rooms'} className="font-semibold" >Add Rooms</Link></li>
+                    <li><Link href={'/my-listing'} className="font-semibold" >My Listing</Link></li>
+                    <li><Link href={'/my-bookings'} className="font-semibold" >My Bookings</Link></li>
 
 
                 </> :
 
 
                 <>
-                    <li><Link href={'/'}>Home</Link></li>
-                    <li><Link href={'/rooms'}>Rooms</Link></li>
+                    <li><Link href={'/'} className="font-semibold" >Home</Link></li>
+                    <li><Link href={'/rooms'} className="font-semibold" >Rooms</Link></li>
 
                 </>
 
@@ -138,9 +138,9 @@ const Navbar = () => {
 
 
                                 </div>
-                                : <div>
-                                    <Link href={'/login'} className="btn">Login</Link>
-                                    <Link href={'/register'} className="btn">Register</Link>
+                                : <div className="flex gap-2 ">
+                                    <Link href={'/login'} className="btn bg-blue-100 text-blue-900">Login</Link>
+                                    <Link href={'/register'} className="btn bg-cyan-50 text-cyan-900">Register</Link>
                                 </div>
 
                         }

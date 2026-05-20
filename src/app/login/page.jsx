@@ -46,12 +46,12 @@ const LoginPage = () => {
 
 
     return (
-        <div className="max-w-7xl mx-auto">
+        <div className="max-w-md mx-auto">
             <div className="text-center font-semibold text-2xl mb-5">
-                <h1>Login</h1>
+                <h1 className="mt-2">Login</h1>
             </div>
-            <Card className="border  p-7">
-                <Form onSubmit={onSubmit} className="flex w-96 flex-col gap-4" >
+            <Card className="border border-cyan-400  mx-auto">
+                <Form onSubmit={onSubmit} className="flex flex-col gap-4" >
 
 
                     <TextField
@@ -66,7 +66,8 @@ const LoginPage = () => {
                         }}
                     >
                         <Label>Email</Label>
-                        <Input placeholder="john@example.com" />
+                        <Input placeholder="john@example.com " className={'w-full'}
+                        />
                         <FieldError />
                     </TextField>
                     <TextField
@@ -88,23 +89,21 @@ const LoginPage = () => {
                         }}
                     >
                         <Label>Password</Label>
-                        <Input placeholder="Enter your password" />
+                        <Input placeholder="Enter your password" className={'w-full'} />
                         <Description>Must be at least 8 characters with 1 uppercase and 1 number</Description>
                         <FieldError />
                     </TextField>
                     <div className="flex justify-center gap-2">
-                        <Button className={"w-full"} type="submit">
-                            <Checkbox />
-                            LogIn                        </Button>
+                        <Button className={"w-full"} type="submit">LogIn</Button>
 
                     </div>
                 </Form>
                 <div className="space-y-3">
-                    <p className="text-center border p-1 rounded-full">Or Sign up with</p>
+                    <p className="text-center  p-1 rounded-full  border-2 border-cyan-400">Or Sign up with</p>
                     <Button onClick={handleGoogleSignIn} className={'w-full bg-cyan-500'}><FcGoogle />
                         SignUp with Google</Button>
                 </div>
-                <h1>Don't have an account ? <Link className="text-cyan-500" href={"/register"}>Register</Link></h1>
+                <h1 className="text-center">Don't have an account ? <Link className="text-cyan-500" href={"/register"}>Register</Link></h1>
 
             </Card>
         </div>

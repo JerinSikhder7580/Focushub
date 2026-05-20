@@ -51,11 +51,11 @@ const RegisterPage = () => {
 
 
     return (
-        <div className="max-w-7xl mx-auto p-5">
+        <div className="max-w-md mx-auto p-5">
             <div className="text-center font-semibold text-2xl mb-5">
                 <h1>Create Account</h1>
             </div>
-            <Card className="border ">
+            <Card className="border-2 p-2 border-cyan-600 ">
                 <Form onSubmit={onSubmit} className="flex w-96 flex-col gap-4" >
 
                     <TextField
@@ -65,7 +65,7 @@ const RegisterPage = () => {
 
                     >
                         <Label>Name</Label>
-                        <Input placeholder="Enter your name here" />
+                        <Input placeholder="Enter your name here" className={'w-full'} />
                         <FieldError />
                     </TextField>
 
@@ -77,7 +77,7 @@ const RegisterPage = () => {
 
                     >
                         <Label>Image</Label>
-                        <Input placeholder="Enter your image url here" />
+                        <Input placeholder="Enter your image url here"  className={'w-full'}/>
                         <FieldError />
                     </TextField>
 
@@ -93,7 +93,7 @@ const RegisterPage = () => {
                         }}
                     >
                         <Label>Email</Label>
-                        <Input placeholder="john@example.com" />
+                        <Input placeholder="john@example.com" className={'w-full'} />
                         <FieldError />
                     </TextField>
                     <TextField
@@ -115,7 +115,7 @@ const RegisterPage = () => {
                         }}
                     >
                         <Label>Password</Label>
-                        <Input placeholder="Enter your password" />
+                        <Input placeholder="Enter your password"  className={'w-full'}/>
                         <Description>Must be at least 8 characters with 1 uppercase and 1 number</Description>
                         <FieldError />
                     </TextField>
@@ -127,12 +127,12 @@ const RegisterPage = () => {
                     </div>
                 </Form>
                 <div className="space-y-3">
-                    <p className="text-center border p-1 rounded-full text-black block">Or Sign up with</p>
-                    <Button onClick={handleGoogleSignIn} className={' bg-cyan-500'}><FcGoogle />
+                    <p className="text-center border-2 border-cyan-600 p-1 rounded-full text-black block">Or Sign up with</p>
+                    <Button onClick={handleGoogleSignIn} className={' bg-cyan-500 w-full'}><FcGoogle />
                         SignUp with Google</Button>
                 </div>
 
-                <h1>Already have an account ? <Link className="text-cyan-500" href={"/login"}>Login</Link>  </h1>
+                <h1 className="text-center">Already have an account ? <Link className="text-cyan-500" href={"/login"}>Login</Link>  </h1>
             </Card>
         </div>
     );
