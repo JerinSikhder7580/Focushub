@@ -143,6 +143,9 @@ const RegisterPage = () => {
                         </TextField>
 
                         {/* Password */}
+
+
+
                         <TextField
                             isRequired
                             minLength={8}
@@ -172,6 +175,8 @@ const RegisterPage = () => {
                                 placeholder="Enter your password"
                                 className={'w-full'}
                             />
+
+
 
                             <Description>
                                 Must be at least 8 characters with 1 uppercase and 1 number
@@ -203,6 +208,8 @@ const RegisterPage = () => {
                         </p>
 
                         {/* Google */}
+
+
                         <Button
                             onClick={handleGoogleSignIn}
                             className={'bg-cyan-500 w-full'}
@@ -229,6 +236,8 @@ const RegisterPage = () => {
                         </Link>
 
                     </h1>
+
+
 
                 </Card>
             </div>

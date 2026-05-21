@@ -83,22 +83,6 @@ export default function AddRoomsPage() {
 
 
 
-        // if (result.insertedId) {
-        //     router.push("/rooms");
-
-        // }
-
-
-
-
-        // if (res.ok) {
-        // toast.success("Room added successfully");
-
-        // form.reset();
-        // setSelectedAmenities([]);
-
-        // router.push("/rooms");
-        // }
     };
 
     return (
