@@ -177,6 +177,10 @@ const LoginPage = () => {
 
                     </Form>
 
+
+
+                    
+
                     {/* Divider */}
                     <div className="space-y-4 mt-5">
 
@@ -212,7 +216,7 @@ const LoginPage = () => {
                             Register
                         </Link>
 
-                        
+
 
                     </h1>
 
