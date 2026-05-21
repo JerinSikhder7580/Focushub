@@ -54,13 +54,17 @@ const DetailsPage = () => {
             setToken(tokenData.token)
 
             fetch(`http://localhost:5000/room/${id}`, {
-                // method: "GET",
+                method: "GET",
                 headers: {
                     "content-type": "application/json",
                     authorization: `Bearer ${tokenData.token}`
                 }
             })
-                .then((res) => res.json())
+                .then((res) => {
+                    console.log(res)
+                    return res.json()
+
+                })
                 .then((userData) => {
                     setAmenities(userData.amenities)
                     setRoom(userData)
@@ -149,11 +153,14 @@ const DetailsPage = () => {
         const data = Object.fromEntries(formData.entries())
         console.log(data)
 
-        
+
         data.roomId = room._id
         data.userEmail = user?.email
         data.bookedAt = new Date()
         data.cost = totalCost
+        data.userId = user?.id
+        data.roomName = room.roomName
+        data.roomImage = room.image
 
         if (Number(startTime) >= Number(endTime)) {
             return setTimeError('End time must be after start time')
@@ -260,7 +267,7 @@ const DetailsPage = () => {
 
     }
 
-    
+
     const handleDelete = () => {
 
 
@@ -277,10 +284,10 @@ const DetailsPage = () => {
             if (result.isConfirmed) {
                 // js pora suru korteche  
 
-                fetch(`http://localhost:5000/room/${room._id}`,{
-                    method:"DELETE",
-                    headers:{
-                        "content-type":"application/json"
+                fetch(`http://localhost:5000/room/${room._id}`, {
+                    method: "DELETE",
+                    headers: {
+                        "content-type": "application/json"
                     }
 
                 })
@@ -295,7 +302,6 @@ const DetailsPage = () => {
 
 
     }
-
 
 
     // modalElement.current.close()

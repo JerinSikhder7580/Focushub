@@ -12,6 +12,11 @@ import {
     TextField
 } from "@heroui/react";
 
+
+
+
+
+
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { FcGoogle } from "react-icons/fc";
@@ -47,6 +52,9 @@ const LoginPage = () => {
         const { error } = await authClient.signIn.social({
             provider: "google",
             callbackURL: "/",
+
+
+
         })
 
         if (error) {
@@ -67,6 +75,8 @@ const LoginPage = () => {
                         Login
                     </h1>
 
+
+
                 </div>
 
                 {/* Card */}
@@ -82,6 +92,10 @@ const LoginPage = () => {
                         <TextField
                             isRequired
                             name="email"
+
+
+
+
                             type="email"
                             validate={(value) => {
 
@@ -112,6 +126,8 @@ const LoginPage = () => {
                             type="password"
                             validate={(value) => {
 
+
+
                                 if (value.length < 8) {
                                     return "Password must be at least 8 characters";
                                 }
@@ -128,6 +144,8 @@ const LoginPage = () => {
                             }}
                         >
 
+
+
                             <Label>Password</Label>
 
                             <Input
@@ -140,6 +158,8 @@ const LoginPage = () => {
                             </Description>
 
                             <FieldError />
+
+
 
                         </TextField>
 
@@ -176,6 +196,8 @@ const LoginPage = () => {
 
                         </Button>
 
+
+
                     </div>
 
                     {/* Register */}
@@ -189,6 +211,8 @@ const LoginPage = () => {
                         >
                             Register
                         </Link>
+
+                        
 
                     </h1>
 

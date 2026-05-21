@@ -11,6 +11,7 @@ import Skeleton from 'react-loading-skeleton';
 const AllRoomsPage = () => {
 
     const [rooms, setRooms] = useState([...Array(1)])
+    console.log(rooms)
 
     useEffect(() => {
 
