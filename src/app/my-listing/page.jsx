@@ -49,6 +49,8 @@ const MyListingPage = () => {
     }
 
 
+
+
     return (
         <div className='py-10'>
             <div className='max-w-6xl mx-auto px-5'>
@@ -65,19 +67,33 @@ const MyListingPage = () => {
                                         className='object-cover w-full h-65'
                                         height={260}
                                         width={400}
+
+
                                     /> :
                                     <Skeleton height={260} className='-translate-y-1 '></Skeleton>
                                 }
                                 <div className='p-5 pb-0'>
                                     <div>
                                         <h1 className='font-semibold text-xl'>{room?.roomName || <Skeleton width={150} />}</h1>
+
+
                                         <p className='text-gray-700 mb-3'>{room?.description || <Skeleton width={180}></Skeleton>}</p>
                                     </div>
                                     <div className='grid grid-cols-2 gap-3'>
                                         {room ?
                                             <div className='flex gap-2 bg-slate-200 px-3 py-2 rounded '>
+
+
+
                                                 <Layers className='text-cyan-700' />
                                                 <h3>{returnFloor(room?.floor)} Floor</h3>
+
+
+
+
+
+
+
                                             </div> :
                                             <Skeleton height={40}></Skeleton>
                                         }
@@ -93,6 +109,8 @@ const MyListingPage = () => {
                                     <div className='flex gap-3 flex-wrap my-4'>
 
                                         {
+
+
                                             room?.amenities.map((amenity, index) =>
                                                 <span className='text-cyan-800 font-semibold text-sm bg-sky-100 px-2 py-1 rounded-full' key={index}>{amenity}</span>
                                             )
@@ -107,6 +125,8 @@ const MyListingPage = () => {
                                         </div> :
                                         <Skeleton width={55} height={30}></Skeleton>
 
+
+
                                     }
                                     {room ?
                                         <Link href={`/rooms-details/${room._id}`}  className='btn bg-sky-700 text-white'>View Details <Eye size={18} /></Link>
@@ -114,6 +134,8 @@ const MyListingPage = () => {
                                         <Skeleton width={129} height={40}></Skeleton>
                                     }
                                 </div>
+
+
 
                             </div>
                         )
