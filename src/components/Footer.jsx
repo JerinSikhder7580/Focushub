@@ -11,10 +11,10 @@ import { FaXTwitter } from "react-icons/fa6";
 const Footer = () => {
     return (
         <footer className="bg-[#0B1120] border-t border-white/10 text-gray-300">
-            <div className="max-w-7xl mx-auto px-6 py-14">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14">
 
                 {/* Main Footer */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10">
 
                     {/* Logo & Description */}
                     <div>
@@ -28,7 +28,8 @@ const Footer = () => {
                         </p>
 
                         {/* Social Icons */}
-                        <div className="flex items-center gap-4 mt-6">
+                        <div className="flex items-center gap-4 mt-6 flex-wrap">
+
                             <a
                                 href="https://facebook.com"
                                 target="_blank"
@@ -64,6 +65,7 @@ const Footer = () => {
                             >
                                 <FaInstagram />
                             </a>
+
                         </div>
                     </div>
 
@@ -74,6 +76,7 @@ const Footer = () => {
                         </h3>
 
                         <ul className="space-y-3">
+
                             <li>
                                 <Link
                                     href="/"
@@ -109,6 +112,7 @@ const Footer = () => {
                                     My Bookings
                                 </Link>
                             </li>
+
                         </ul>
                     </div>
 
@@ -137,6 +141,7 @@ const Footer = () => {
                         </p>
 
                         <form className="flex flex-col gap-3">
+
                             <input
                                 type="email"
                                 placeholder="Enter your email"
@@ -149,17 +154,20 @@ const Footer = () => {
                             >
                                 Subscribe
                             </button>
+
                         </form>
                     </div>
                 </div>
 
                 {/* Bottom Footer */}
-                <div className="border-t border-white/10 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500">
+                <div className="border-t border-white/10 mt-12 pt-6 flex flex-col md:flex-row items-center justify-between gap-4 text-sm text-gray-500 text-center md:text-left">
+
                     <p>
                         © {new Date().getFullYear()} StudyNest. All rights reserved.
                     </p>
 
-                    <div className="flex items-center gap-6">
+                    <div className="flex flex-wrap items-center justify-center md:justify-start gap-6">
+
                         <Link
                             href="/privacy-policy"
                             className="hover:text-cyan-400 duration-300"
@@ -173,6 +181,7 @@ const Footer = () => {
                         >
                             Terms & Conditions
                         </Link>
+
                     </div>
                 </div>
             </div>

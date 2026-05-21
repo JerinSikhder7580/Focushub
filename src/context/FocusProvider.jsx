@@ -11,7 +11,8 @@ const FocusProvider = ({ children }) => {
     const data = {
 
         dark,
-        setDark
+        setDark,
+
     }
     console.log(dark)
     return <FocusContext value={data}>{children}</FocusContext>

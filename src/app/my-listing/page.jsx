@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client"
 import { authClient } from '@/lib/auth-client';
 import { Eye, HousePlus, Layers,  Users } from 'lucide-react';

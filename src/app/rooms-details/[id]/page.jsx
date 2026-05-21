@@ -1,4 +1,5 @@
 'use client'
+import FocusContext from '@/context/FocusContext';
 import { authClient } from '@/lib/auth-client';
 import { Avatar, Button } from '@heroui/react';
 import { email, object } from 'better-auth';
@@ -7,10 +8,15 @@ import { Calendar, CircleCheck, Clock, DollarSign, Layers, SquarePen, Trash2, Us
 import Image from 'next/image';
 import { useParams } from 'next/navigation';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useContext, useEffect, useRef, useState } from 'react';
 import toast, { Toaster } from 'react-hot-toast';
+import Swal from 'sweetalert2';
 
 const DetailsPage = () => {
+
+
+    const { id } = useParams()
+
 
     const { data } = authClient.useSession()
     const user = data?.user
@@ -28,34 +34,51 @@ const DetailsPage = () => {
     const [amenities, setAmenities] = useState([])
 
 
-    const { id } = useParams() // {id:theId}
 
     const [room, setRoom] = useState()
+    console.log(room)
     const [authorData, setAuthorData] = useState()
     const [startTime, setStartTime] = useState()
     const [endTime, setEndTime] = useState()
     const [totalCost, setTotalCost] = useState(0)
     const [timeError, setTimeError] = useState()
+    const [token, setToken] = useState()
+
 
 
 
     useEffect(() => {
-        fetch(`http://localhost:5000/room/${id}`)
-            .then((res) => res.json())
-            .then((userData) => {
-                setAmenities(userData.amenities)
-                setRoom(userData)
-                console.log(userData)
-                fetch(`http://localhost:5000/user?email=${userData.userEmail}`) // 
-                    .then((res) => res.json())
-                    .then((author) => {
-                        setAuthorData(author)
+        const getToken = async () => {
 
-                    })
+            const { data: tokenData } = await authClient.token()
+            setToken(tokenData.token)
+
+            fetch(`http://localhost:5000/room/${id}`, {
+                // method: "GET",
+                headers: {
+                    "content-type": "application/json",
+                    authorization: `Bearer ${tokenData.token}`
+                }
+            })
+                .then((res) => res.json())
+                .then((userData) => {
+                    setAmenities(userData.amenities)
+                    setRoom(userData)
+                    console.log(userData)
+                    fetch(`http://localhost:5000/user?email=${userData.userEmail}`) // 
+                        .then((res) => res.json())
+                        .then((author) => {
+                            setAuthorData(author)
+
+                        })
 
 
-            }
-            )
+                }
+                )
+
+        }
+
+        getToken()
 
 
 
@@ -126,6 +149,10 @@ const DetailsPage = () => {
         const data = Object.fromEntries(formData.entries())
         console.log(data)
 
+        //  var 
+        // let 
+        // const
+        // state .............
 
         data.roomId = room._id
         data.userEmail = user?.email
@@ -136,11 +163,18 @@ const DetailsPage = () => {
             return setTimeError('End time must be after start time')
 
         }
+
+
         toast.promise(
+
+
+
+
             fetch("http://localhost:5000/booking", {
                 method: "POST",
                 headers: {
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    authorization: `Bearer ${token}`
                 },
                 body: JSON.stringify(data)
 
@@ -174,7 +208,7 @@ const DetailsPage = () => {
 
     }
     const handleCheckbox = (e) => {
-        const value = e.target
+        const value = e.target.value
         if (e.target.checked) {
             setAmenities([...amenities, e.target.value])
         }
@@ -189,36 +223,80 @@ const DetailsPage = () => {
 
 
 
-    const handleEdit = (e) => {
+    const handleEdit = async (e) => {
         e.preventDefault()
+        editModal.current.close()
         const formData = new FormData(e.target)
         const data = Object.fromEntries(formData.entries())
         data.amenities = amenities
         data.roomId = room._id
-
         console.log(data)
 
-        // /booking
 
-        // body: for fridge boro data 
 
-        // params: small data phone 
+        toast.promise(
+            fetch("http://localhost:5000/booking", {
+                method: "PATCH",
+                headers: {
+                    "content-type": "application/json",
+                    authorization: `Bearer ${token}`
+                },
+                body: JSON.stringify(data)
+            }).then(res => res.json())
+                .then(data => {
+                    if (data.modifiedCount !== 1) {
+                        throw new Error("Update Failed")
 
-        // query: id like phone
+                    }
+                })
+            ,
+            {
+                loading: "Updating",
+                success: () => {
+                    setRoom(data)
+                    return "Updated"
+                }, // server respond
+                error: (err) => err.message || "Something went wrong" // server not responding
 
-        const res = fetch("http://localhost:5000/booking", {
-            method: "PATCH",
-            headers: {
-                "content-type": "application/json"
-            },
-            body: JSON.stringify(data)
-        })
-
+            }
+        )
 
 
     }
+    // console.log(amenities)
 
+    
     const handleDelete = () => {
+
+
+
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // js pora suru korteche  
+
+                fetch(`http://localhost:5000/room/${room._id}`,{
+                    method:"DELETE",
+                    headers:{
+                        "content-type":"application/json"
+                    }
+
+                })
+
+                // Swal.fire({
+                //     title: "Deleted!",
+                //     text: "Your file has been deleted.",
+                //     icon: "success"
+                // });
+            }
+        });
 
 
     }
@@ -270,7 +348,7 @@ const DetailsPage = () => {
                         </div>
 
                         <h1 className='font-semibold text-lg py-2'>Amenities</h1>
-                        <div className='flex gap-2 mb-3'>
+                        <div className='flex gap-2 mb-3 flex-wrap'>
                             {
                                 room.amenities.map((aminity, index) =>
                                     <div className='flex gap-1 bg-slate-100 rounded px-2 items-center' key={index}>
@@ -286,7 +364,7 @@ const DetailsPage = () => {
                         {user?.email === room.userEmail ?
                             <div className='flex justify-between'>
                                 <button onClick={() => editModal.current.showModal()} className='flex gap-1 btn text-sky-800 bg-sky-100 border border-sky-200'> <SquarePen size={18} />Edit</button>
-                                <button className='flex gap-1 btn text-red-500 bg-red-100 border border-red-200'> <Trash2 size={18} />Delete</button>
+                                <button onClick={handleDelete} className='flex gap-1 btn text-red-500 bg-red-100 border border-red-200'> <Trash2 size={18} />Delete</button>
                             </div>
                             :
                             <button onClick={() => modalElement.current.showModal()} className='bg-cyan-600 btn w-full text-white'>Book Now</button>}
