@@ -15,7 +15,7 @@ const AllRoomsPage = () => {
 
     useEffect(() => {
 
-        fetch("http://localhost:5000/rooms")
+        fetch("https://focushub-server.vercel.app/rooms")
             .then((res) => res.json())
             .then(data => setRooms(data))
 
@@ -26,7 +26,7 @@ const AllRoomsPage = () => {
 
         const value = e.target.value
 
-        fetch(`http://localhost:5000/rooms?roomName=${value}`)
+        fetch(`https://focushub-server.vercel.app/rooms?roomName=${value}`)
             .then((res) => res.json())
             .then((roomData) => {
                 setRooms(roomData)
@@ -40,7 +40,7 @@ const AllRoomsPage = () => {
         const min = e.target.min.value
         const max = e.target.max.value
 
-        fetch(`http://localhost:5000/rooms?amenities=${amenities}&min=${min}&max=${max}`)
+        fetch(`https://focushub-server.vercel.app/rooms?amenities=${amenities}&min=${min}&max=${max}`)
             .then((res) => res.json())
             .then(data => {
                 setRooms(data)

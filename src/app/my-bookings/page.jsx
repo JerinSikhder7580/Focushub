@@ -24,7 +24,7 @@ const MyBookingsPage = () => {
 
         if (!userId) return
 
-        fetch(`http://localhost:5000/booking/${userId}`)
+        fetch(`https://focushub-server.vercel.app/booking/${userId}`)
             .then(res => res.json())
             .then(data => {
                 console.log(data)
@@ -49,7 +49,7 @@ const MyBookingsPage = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 toast.promise(
-                    fetch(`http://localhost:5000/booking/${id}`, {
+                    fetch(`https://focushub-server.vercel.app/booking/${id}`, {
                         method: "DELETE",
                         headers: {
                             "content-type": "application/json"
@@ -201,7 +201,7 @@ const MyBookingsPage = () => {
     );
 
 
-    
+
 };
 
 export default MyBookingsPage;

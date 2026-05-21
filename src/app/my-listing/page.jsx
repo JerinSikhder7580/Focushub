@@ -16,7 +16,7 @@ const MyListingPage = () => {
 
     useEffect(() => {
 
-        fetch(`http://localhost:5000/rooms?userEmail=${data?.user.email}`)
+        fetch(`https://focushub-server.vercel.app/rooms?userEmail=${data?.user.email}`)
             .then((res) => res.json())
             .then(data => {
                 setRooms(data)

@@ -1,36 +1,137 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# FocusHub
 
-## Getting Started
+FocusHub is a study room booking web application built for a Milestone 9 assignment. Users can browse available rooms, filter and search listings, view room details, book rooms, manage their bookings, and create or manage their own room listings.
 
-First, run the development server:
+## Live Links
+
+- Client: Add your deployed client URL here
+- Server: Add your deployed server URL here
+
+## Features
+
+- Email/password authentication with Better Auth
+- Google social login
+- Browse all study rooms
+- Search rooms by room name
+- Filter rooms by amenities and hourly rate
+- View detailed room information
+- Book a room with date, start time, end time, and note
+- View and cancel personal bookings
+- Add new room listings
+- View user-specific room listings
+- Edit and delete owned rooms
+- Responsive layout for mobile, tablet, and desktop
+- Dark mode support
+- Toast and alert feedback for important actions
+
+## Tech Stack
+
+- Next.js 16
+- React 19
+- Tailwind CSS 4
+- DaisyUI
+- HeroUI
+- Better Auth
+- MongoDB
+- Lucide React
+- React Hot Toast
+- SweetAlert2
+- Date FNS
+
+## Main Routes
+
+| Route | Description |
+| --- | --- |
+| `/` | Home page with banner and extra sections |
+| `/rooms` | All rooms with search and filters |
+| `/rooms-details/[id]` | Room details, booking, edit, and delete actions |
+| `/add-rooms` | Add a new room |
+| `/my-listing` | Rooms created by the logged-in user |
+| `/my-bookings` | Bookings made by the logged-in user |
+| `/login` | Login page |
+| `/register` | Registration page |
+
+## Environment Variables
+
+Create a `.env` file in the root folder and add these variables:
+
+```env
+BETTER_AUTH_SECRET=your_better_auth_secret
+BETTER_AUTH_URL=http://localhost:3000
+MONGODB_URI=your_mongodb_connection_string
+GOOGLE_CLIENTID=your_google_client_id
+GOOGLE_SECRET=your_google_client_secret
+```
+
+## Installation
+
+Clone the project and install dependencies:
+
+```bash
+npm install
+```
+
+Run the development server:
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open the app in your browser:
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+```txt
+http://localhost:3000
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Backend API
 
-## Learn More
+This client expects the backend server to run at:
 
-To learn more about Next.js, take a look at the following resources:
+```txt
+http://localhost:5000
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Used API groups include:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `/rooms`
+- `/room/:id`
+- `/booking`
+- `/booking/:userId`
+- `/user?email=user@example.com`
 
-## Deploy on Vercel
+## Available Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```bash
+npm run dev
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Starts the development server.
+
+```bash
+npm run build
+```
+
+Builds the app for production.
+
+```bash
+npm run start
+```
+
+Runs the production build.
+
+```bash
+npm run lint
+```
+
+Runs ESLint.
+
+## Assignment Notes
+
+- The application uses protected user-based actions for room listing and booking features.
+- Room images are loaded from remote image URLs.
+- The UI is responsive and supports dark mode through the existing dark class setup.
+- Authentication is handled through Better Auth with MongoDB and Google OAuth support.
+
+## Author
+
+Add your name here.

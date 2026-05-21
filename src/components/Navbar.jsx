@@ -54,6 +54,9 @@ const Navbar = () => {
                     <div className="navbar-start">
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+
+
+                                
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
                             </div>
                             <ul
@@ -61,6 +64,11 @@ const Navbar = () => {
                                 className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow dark:text-white dark:hover:bg-gray-200">
                                 {links}
                             </ul>
+
+
+
+
+
                         </div>
                         <a className="text-xl font-extrabold text-black dark:text-white">
                             Focus<span className="text-cyan-400">Hub</span></a>
@@ -85,6 +93,11 @@ const Navbar = () => {
 
                                     {/* dropdown */}
                                     {/* {dropdown && */}
+
+
+
+
+
                                     <div className={` shadow-sm absolute right-0 top-12 bg-white rounded-xl overflow-hidden origin-top-right w-max ${dropdown ? "opacity-100 scale-100 " : 'opacity-0 scale-90'} duration-150`}>
                                         <div className="flex items-center gap-2 bg-cyan-500 p-5 ">
                                             <div className="border-2 border-blue-900 rounded-full">
@@ -116,6 +129,9 @@ const Navbar = () => {
                                                 </div>
                                             </Link>
 
+
+
+
                                             <Link className="flex gap-3 hover:bg-green-50" href={'/my-bookings'}>
                                                 <span className="flex items-center justify-center  bg-green-100 text-green-900 h-10 w-10 rounded">
                                                     <ClipboardClock />
@@ -133,6 +149,10 @@ const Navbar = () => {
                                         </div>
 
                                     </div>
+
+
+
+
                                     {/* } */}
 
 

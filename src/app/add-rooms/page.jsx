@@ -53,7 +53,7 @@ export default function AddRoomsPage() {
 
 
         toast.promise(
-            fetch("http://localhost:5000/rooms", {
+            fetch("https://focushub-server.vercel.app/rooms", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json"

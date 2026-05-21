@@ -53,7 +53,7 @@ const DetailsPage = () => {
             const { data: tokenData } = await authClient.token()
             setToken(tokenData.token)
 
-            fetch(`http://localhost:5000/room/${id}`, {
+            fetch(`https://focushub-server.vercel.app/room/${id}`, {
                 method: "GET",
                 headers: {
                     "content-type": "application/json",
@@ -69,7 +69,7 @@ const DetailsPage = () => {
                     setAmenities(userData.amenities)
                     setRoom(userData)
                     console.log(userData)
-                    fetch(`http://localhost:5000/user?email=${userData.userEmail}`) // 
+                    fetch(`https://focushub-server.vercel.app/user?email=${userData.userEmail}`) // 
                         .then((res) => res.json())
                         .then((author) => {
                             setAuthorData(author)
@@ -173,7 +173,7 @@ const DetailsPage = () => {
 
 
 
-            fetch("http://localhost:5000/booking", {
+            fetch("https://focushub-server.vercel.app/booking", {
                 method: "POST",
                 headers: {
                     "content-type": "application/json",
@@ -237,7 +237,7 @@ const DetailsPage = () => {
 
 
         toast.promise(
-            fetch("http://localhost:5000/booking", {
+            fetch("https://focushub-server.vercel.app/booking", {
                 method: "PATCH",
                 headers: {
                     "content-type": "application/json",
@@ -283,7 +283,7 @@ const DetailsPage = () => {
             if (result.isConfirmed) {
               
 
-                fetch(`http://localhost:5000/room/${room._id}`, {
+                fetch(`https://focushub-server.vercel.app/room/${room._id}`, {
                     method: "DELETE",
                     headers: {
                         "content-type": "application/json"
