@@ -149,11 +149,7 @@ const DetailsPage = () => {
         const data = Object.fromEntries(formData.entries())
         console.log(data)
 
-        //  var 
-        // let 
-        // const
-        // state .............
-
+        
         data.roomId = room._id
         data.userEmail = user?.email
         data.bookedAt = new Date()
@@ -263,7 +259,6 @@ const DetailsPage = () => {
 
 
     }
-    // console.log(amenities)
 
     
     const handleDelete = () => {
