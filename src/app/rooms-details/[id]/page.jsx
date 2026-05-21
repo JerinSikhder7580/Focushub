@@ -219,7 +219,6 @@ const DetailsPage = () => {
             const temp = amenities.filter((amenity) => amenity !== value)
             setAmenities(temp)
         }
-        // array.filter((value)=>condition)
     }
 
 
@@ -259,7 +258,7 @@ const DetailsPage = () => {
                     setRoom(data)
                     return "Updated"
                 }, // server respond
-                error: (err) => err.message || "Something went wrong" // server not responding
+                error: (err) => err.message || "Something went wrong" 
 
             }
         )
@@ -282,7 +281,7 @@ const DetailsPage = () => {
             confirmButtonText: "Yes, delete it!"
         }).then((result) => {
             if (result.isConfirmed) {
-                // js pora suru korteche  
+              
 
                 fetch(`http://localhost:5000/room/${room._id}`, {
                     method: "DELETE",
@@ -292,11 +291,7 @@ const DetailsPage = () => {
 
                 })
 
-                // Swal.fire({
-                //     title: "Deleted!",
-                //     text: "Your file has been deleted.",
-                //     icon: "success"
-                // });
+               
             }
         });
 
@@ -304,7 +299,6 @@ const DetailsPage = () => {
     }
 
 
-    // modalElement.current.close()
 
 
     return (
@@ -370,6 +364,9 @@ const DetailsPage = () => {
                             :
                             <button onClick={() => modalElement.current.showModal()} className='bg-cyan-600 btn w-full text-white'>Book Now</button>}
 
+
+
+
                         <div className='space-y-2'>
                             <h1 className='text-md font-bold mt-2 ml-3'>Listed by</h1>
                             <div className='flex items-center gap-3'>
@@ -389,6 +386,8 @@ const DetailsPage = () => {
                         </div>
 
                     </div>
+
+
 
                 </div>
 
@@ -420,6 +419,9 @@ const DetailsPage = () => {
                                             )
                                         }
                                     </select>
+
+
+
                                 </div>
                                 <div>
                                     <label className='flex gap-1'><Clock /> End Time</label>
@@ -439,6 +441,10 @@ const DetailsPage = () => {
                             </div>
 
                             <fieldset>
+
+
+
+
                                 <label className='block'>Special Note</label>
                                 <textarea required className='textarea w-full' name="note" ></textarea>
                             </fieldset>
@@ -467,6 +473,9 @@ const DetailsPage = () => {
                     <div className="modal-box max-w-2xl dark:bg-black">
                         <form method="dialog">
                             <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2 dark:text-white">✕</button>
+
+
+
                         </form>
                         <h1 className='text-center text-xl text-cyan-800 dark:text-white font-bold'>Edit your room details</h1>
 
@@ -484,6 +493,9 @@ const DetailsPage = () => {
                             <div>
 
                                 <label className="mb-2 block text-sm font-medium text-black dark:text-white">
+
+
+
                                     Room Name
                                 </label>
 
@@ -503,6 +515,9 @@ const DetailsPage = () => {
                                 <label className="mb-2 block text-sm font-medium text-black dark:text-white">
                                     Image URL
                                 </label>
+
+
+
 
                                 <input
                                     type="url"
@@ -529,6 +544,10 @@ const DetailsPage = () => {
                                     />
                                 </div>
 
+
+
+
+
                                 <div>
                                     <label className="mb-2 block text-sm font-medium text-black dark:text-white">
                                         Capacity
@@ -545,6 +564,7 @@ const DetailsPage = () => {
                                 </div>
                             </div>
 
+
                             {/* Hourly Rate */}
                             <div>
                                 <label className="mb-2 block text-sm font-medium text-black dark:text-white">
@@ -560,6 +580,9 @@ const DetailsPage = () => {
                                     className="w-full rounded-xl border border-zinc-700 bg-white text-black dark:text-white dark:bg-zinc-800 px-4 py-3 outline-none transition-all focus:border-cyan-400"
                                 />
                             </div>
+
+
+
 
                             {/* Amenities */}
                             <div>
@@ -583,6 +606,9 @@ const DetailsPage = () => {
                                             />
 
                                             <span>{item}</span>
+
+
+
                                         </label>
                                     ))}
                                 </div>
@@ -602,6 +628,9 @@ const DetailsPage = () => {
                                     className="w-full rounded-xl border border-zinc-700 text-black  dark:text-white bg-white dark:bg-zinc-800 px-4 py-3 outline-none transition-all focus:border-cyan-400 placeholder:text-gray-500"
                                 />
                             </div>
+
+
+
 
 
                             {/* Submit */}
