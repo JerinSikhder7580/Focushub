@@ -33,6 +33,9 @@ const MyBookingsPage = () => {
 
     }, [userId])
 
+
+
+
     const handleCancelBooking = (id) => {
 
         Swal.fire({
@@ -59,6 +62,9 @@ const MyBookingsPage = () => {
                             }
                         })
                     ,
+
+
+
                     {
                         loading: "Canceling",
                         success: () => {
@@ -91,6 +97,9 @@ const MyBookingsPage = () => {
                     <h1 className='text-3xl sm:text-4xl font-bold text-cyan-950'>
                         Reserved Rooms
                     </h1>
+
+
+
                 </div>
 
                 <div className='grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-5'>
@@ -120,6 +129,9 @@ const MyBookingsPage = () => {
                                             </p>
                                         </div>
 
+
+
+
                                         <div className='flex items-center gap-1 bg-cyan-50 text-cyan-800 font-semibold px-3 py-1 rounded-full'>
                                             <DollarSign size={16} />
                                             <span>{booking?.cost}</span>
@@ -140,6 +152,10 @@ const MyBookingsPage = () => {
                                         <div className='flex items-center gap-3'>
                                             <Mail className='text-cyan-700 shrink-0' size={20} />
                                             <span className='break-all'>{booking?.userEmail}</span>
+
+
+
+
                                         </div>
 
                                         {
@@ -156,13 +172,15 @@ const MyBookingsPage = () => {
 
                                     <button onClick={() => handleCancelBooking(booking._id)} className='btn btn-primary w-full mt-5'>
                                         Cancel Booking
-                                        {/* <BookingCancelAlert bookingId={booking?._id} /> */}
                                     </button>
                                 </div>
                             </div>
                         )
                     }
                 </div>
+
+
+
 
                 {
                     !bookingsData[0] &&
@@ -181,6 +199,9 @@ const MyBookingsPage = () => {
             </section >
         </div >
     );
+
+
+    
 };
 
 export default MyBookingsPage;
