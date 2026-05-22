@@ -35,6 +35,7 @@ const AllRoomsPage = () => {
 
     const handleSearch = (e) => {
         e.preventDefault()
+        if (!token) return
 
 
         const value = e.target.value
@@ -58,7 +59,7 @@ const AllRoomsPage = () => {
 
     const handleFilter = (e) => {
         e.preventDefault()
-
+        if (!token) return
         const amenities = e.target.amenities.value
         const min = e.target.min.value
         const max = e.target.max.value
