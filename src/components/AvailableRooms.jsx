@@ -9,7 +9,7 @@ const AvailableRooms = () => {
     const [availableRooms, setAvailableRooms] = useState()
 
     useEffect(() => {
-        fetch("http://localhost:5000/rooms?limit=6")
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms?limit=6`)
             .then(res => res.json())
             .then(data => setAvailableRooms(data))
     }, [])
