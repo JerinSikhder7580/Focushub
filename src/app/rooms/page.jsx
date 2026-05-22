@@ -11,7 +11,7 @@ import Skeleton from 'react-loading-skeleton';
 const AllRoomsPage = () => {
 
     const [rooms, setRooms] = useState([...Array(10)])
-    const [token, setToken] = useState() // tank 
+    const [token, setToken] = useState(null) // tank 
 
     console.log(rooms)
 
