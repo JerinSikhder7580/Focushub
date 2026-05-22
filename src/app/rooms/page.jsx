@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 "use client"
 
+import { authClient } from '@/lib/auth-client';
 import { Button } from '@heroui/react';
 import { Eye, Layers, Search, Users } from 'lucide-react';
 import Image from 'next/image';
@@ -10,26 +10,49 @@ import Skeleton from 'react-loading-skeleton';
 
 const AllRoomsPage = () => {
 
-    const [rooms, setRooms] = useState([...Array(1)])
+    const [rooms, setRooms] = useState([...Array(10)])
+    const [token, setToken] = useState() // tank 
+
     console.log(rooms)
 
     useEffect(() => {
 
-        fetch("https://focushub-server.vercel.app/rooms")
-            .then((res) => res.json())
-            .then(data => setRooms(data))
+        const getToken = async () => {
+
+
+            const { data: tokenData } = await authClient.token()
+            setToken(tokenData?.token)
+
+
+
+            fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms`)
+                .then((res) => res.json())
+                .then(data => setRooms(data))
+        }
+        getToken()
 
     }, [])
 
     const handleSearch = (e) => {
         e.preventDefault()
 
+
         const value = e.target.value
 
-        fetch(`https://focushub-server.vercel.app/rooms?roomName=${value}`)
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms?roomName=${value}`, {
+            method: "GET",
+            headers: {
+                "content-type": "application/json",
+                authorization: `Bearer ${token}` // room
+            }
+        })
             .then((res) => res.json())
             .then((roomData) => {
                 setRooms(roomData)
+
+
+
+
             })
     }
 
@@ -40,7 +63,13 @@ const AllRoomsPage = () => {
         const min = e.target.min.value
         const max = e.target.max.value
 
-        fetch(`https://focushub-server.vercel.app/rooms?amenities=${amenities}&min=${min}&max=${max}`)
+        fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms?amenities=${amenities}&min=${min}&max=${max}`, {
+            method: "GET",
+            headers: {
+                "content-type": "application/json",
+                authorization: `Bearer ${token}`
+            }
+        })
             .then((res) => res.json())
             .then(data => {
                 setRooms(data)
@@ -186,10 +215,10 @@ const AllRoomsPage = () => {
                     <div className='grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-5 lg:col-span-3'>
 
                         {
-                            rooms.map((room, index) =>
+                            rooms?.map((room, index) =>
 
                                 <div
-                                    className='rounded-2xl overflow-hidden h-auto flex flex-col shadow bg-slate-50'
+                                    className='rounded-2xl overflow-hidden h-auto flex flex-col shadow bg-slate-50  group '
                                     key={index}
                                 >
 
@@ -200,7 +229,7 @@ const AllRoomsPage = () => {
                                             <Image
                                                 src={room?.image}
                                                 alt=''
-                                                className='object-cover w-full h-56'
+                                                className='object-cover w-full h-56 group-hover:scale-105 duration-300'
                                                 width={400}
                                                 height={260}
                                             />

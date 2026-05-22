@@ -53,11 +53,11 @@ const DetailsPage = () => {
             const { data: tokenData } = await authClient.token()
             setToken(tokenData.token)
 
-            fetch(`https://focushub-server.vercel.app/room/${id}`, {
+            fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/room/${id}`, {
                 method: "GET",
                 headers: {
                     "content-type": "application/json",
-                    authorization: `Bearer ${tokenData.token}`
+                    authorization: `Bearer ${tokenData?.token}`
                 }
             })
                 .then((res) => {
@@ -69,7 +69,14 @@ const DetailsPage = () => {
                     setAmenities(userData.amenities)
                     setRoom(userData)
                     console.log(userData)
-                    fetch(`https://focushub-server.vercel.app/user?email=${userData.userEmail}`) // 
+                    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/user?email=${userData.userEmail}`,{
+                        method:"GET",
+                        headers:{
+                            "content-type":"application/json",
+                            authorization:`Bearer ${tokenData.token}`
+                        }
+
+                    }) // 
                         .then((res) => res.json())
                         .then((author) => {
                             setAuthorData(author)
@@ -173,7 +180,7 @@ const DetailsPage = () => {
 
 
 
-            fetch("https://focushub-server.vercel.app/booking", {
+            fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking`, {
                 method: "POST",
                 headers: {
                     "content-type": "application/json",
@@ -237,7 +244,7 @@ const DetailsPage = () => {
 
 
         toast.promise(
-            fetch("https://focushub-server.vercel.app/booking", {
+            fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking`, {
                 method: "PATCH",
                 headers: {
                     "content-type": "application/json",
@@ -283,10 +290,11 @@ const DetailsPage = () => {
             if (result.isConfirmed) {
               
 
-                fetch(`https://focushub-server.vercel.app/room/${room._id}`, {
+                fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/room/${room._id}`, {
                     method: "DELETE",
                     headers: {
-                        "content-type": "application/json"
+                        "content-type": "application/json",
+                        authorization:`{Bearer ${token}`
                     }
 
                 })

@@ -88,7 +88,7 @@ http://localhost:3000
 This client expects the backend server to run at:
 
 ```txt
-http://localhost:5000
+NEXT_PUBLIC_SERVER_URL
 ```
 
 Used API groups include:

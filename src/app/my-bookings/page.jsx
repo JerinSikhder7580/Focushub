@@ -1,5 +1,4 @@
 "use client"
-// import { BookingCancelAlert } from '@/components/BookingCancelAlert';
 import { authClient } from '@/lib/auth-client';
 import { format } from 'date-fns';
 import { CalendarDays, Clock, DollarSign, Mail, StickyNote } from 'lucide-react';
@@ -15,22 +14,36 @@ const MyBookingsPage = () => {
 
 
     const [bookingsData, setBookingsData] = useState([])
+    const [token, setToken] = useState()
+
 
     const now = new Date()
     console.log(now)
 
 
     useEffect(() => {
+        const getToken = async () => {
+            const { data: tokenData } = await authClient.token()
+            setToken(tokenData.token)
 
-        if (!userId) return
 
-        fetch(`https://focushub-server.vercel.app/booking/${userId}`)
-            .then(res => res.json())
-            .then(data => {
-                console.log(data)
-                setBookingsData(data)
+            if (!userId) return
+
+            fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${userId}`,{
+                method:"GET",
+                headers:{
+                    "content-type":"application/json",
+                    authorization:`Bearer ${tokenData?.token}`
+                }
             })
+                .then(res => res.json())
+                .then(data => {
+                    console.log(data)
+                    setBookingsData(data)
+                })
 
+        }
+        getToken()
     }, [userId])
 
 
@@ -49,10 +62,11 @@ const MyBookingsPage = () => {
         }).then((result) => {
             if (result.isConfirmed) {
                 toast.promise(
-                    fetch(`https://focushub-server.vercel.app/booking/${id}`, {
+                    fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/booking/${id}`, {
                         method: "DELETE",
                         headers: {
-                            "content-type": "application/json"
+                            "content-type": "application/json",
+                            authorization: `Bearer ${token}`
                         },
                     })
                         .then((res) => res.json())
@@ -86,7 +100,7 @@ const MyBookingsPage = () => {
 
     return (
         <div className='bg-slate-100 min-h-screen'>
-            <Toaster/>
+            <Toaster />
             <section className='py-10'>
 
                 <div className='mb-8'>

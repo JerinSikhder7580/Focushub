@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { redirect, useRouter } from "next/navigation";
 import toast, { Toaster } from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
@@ -15,6 +15,19 @@ const amenitiesOptions = [
 ];
 
 export default function AddRoomsPage() {
+    const [token, setToken] = useState()
+
+    useEffect(() => {
+        const getToken = async () => {
+            const { data: tokenData } = await authClient.token()
+            setToken(tokenData.token)
+
+        }
+        getToken()
+
+    }, [])
+
+
 
     const user = authClient.useSession()
 
@@ -53,10 +66,12 @@ export default function AddRoomsPage() {
 
 
         toast.promise(
-            fetch("https://focushub-server.vercel.app/rooms", {
+            fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms`, {
                 method: "POST",
                 headers: {
-                    "content-type": "application/json"
+                    "content-type": "application/json",
+                    authorization: `Bearer ${token}`
+
                 },
                 body: JSON.stringify(roomData)
             }).then(res => res.json())
@@ -67,7 +82,7 @@ export default function AddRoomsPage() {
 
                     }
                     else {
-                        throw new Error("Room Doesn't Added")
+                        throw new Error("Room Added Failed")
                     }
                 }),
             {

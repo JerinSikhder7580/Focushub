@@ -1,6 +1,6 @@
 "use client"
 import { authClient } from '@/lib/auth-client';
-import { Eye, HousePlus, Layers,  Users } from 'lucide-react';
+import { Eye, HousePlus, Layers, Users } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useContext, useEffect, useState } from 'react';
@@ -13,14 +13,29 @@ const MyListingPage = () => {
     const { data } = authClient.useSession()
 
     const [rooms, setRooms] = useState([...Array(10)])
+    const [token, setToken] = useState()
+
 
     useEffect(() => {
 
-        fetch(`https://focushub-server.vercel.app/rooms?userEmail=${data?.user.email}`)
-            .then((res) => res.json())
-            .then(data => {
-                setRooms(data)
+        const getToken = async () => {
+            const { data: tokenData } = await authClient.token()
+            setToken(tokenData.token)
+
+            fetch(`${process.env.NEXT_PUBLIC_SERVER_URL}/rooms?userEmail=${data?.user.email}`, {
+                method: "GET",
+                headers: {
+                    "content-type": "application/json",
+                    authorization: `Bearer ${tokenData?.token}`
+                }
+
             })
+                .then((res) => res.json())
+                .then(data => {
+                    setRooms(data)
+                })
+        }
+        getToken()
 
 
     }, [data])
@@ -129,7 +144,7 @@ const MyListingPage = () => {
 
                                     }
                                     {room ?
-                                        <Link href={`/rooms-details/${room._id}`}  className='btn bg-sky-700 text-white'>View Details <Eye size={18} /></Link>
+                                        <Link href={`/rooms-details/${room._id}`} className='btn bg-sky-700 text-white'>View Details <Eye size={18} /></Link>
                                         :
                                         <Skeleton width={129} height={40}></Skeleton>
                                     }

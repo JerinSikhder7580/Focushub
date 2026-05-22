@@ -3,24 +3,48 @@
 import FocusContext from "@/context/FocusContext";
 import { authClient } from "@/lib/auth-client";
 import { Avatar, Button } from "@heroui/react";
+import { router } from "better-auth/api";
 import { ClipboardClock, ListTodo, Moon, Sun } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import { useContext, useState } from "react";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
     const { dark, setDark } = useContext(FocusContext)
+    const router = useRouter()
+
 
     const { data: session } = authClient.useSession()
 
     const user = session?.user
 
-    const handleSignOut = async () => {
+    const [dropdown, setDropDown] = useState(false)
 
-        await authClient.signOut()
+    const handleSignOut = () => {
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, LogOut!"
+        }).then(async (result) => {
+            if (result.isConfirmed) {
+                await authClient.signOut()
+                setDropDown(false)
+                router.push("/login")
+                // }
+
+
+            }
+        });
+
+
     }
 
-    const [dropdown, setDropDown] = useState(false)
 
     const links = <>
         {
@@ -49,14 +73,14 @@ const Navbar = () => {
     return (
         <div className="shadow-sm bg-base-100 dark:bg-[#0b1120]">
             <section>
-                <div className="navbar">
+                <div className="navbar justify-between">
 
                     <div className="navbar-start">
                         <div className="dropdown">
                             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
 
 
-                                
+
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
                             </div>
                             <ul
