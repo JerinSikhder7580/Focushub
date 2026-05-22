@@ -32,7 +32,7 @@ const AvailableRooms = () => {
         }
     }
     return (
-        <div className='p-6'>
+        <div className='p-6 dark:bg-[#0b1120]'>
 
             <section >
                 <h1 className='text-center text-2xl font-semibold text-cyan-900 mb-3'>Available Rooms</h1>

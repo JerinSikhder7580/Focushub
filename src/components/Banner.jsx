@@ -91,7 +91,7 @@ const Banner = () => {
                     <div className='w-full lg:w-1/2'>
                         <Image
                             className='rounded w-full h-auto object-cover'
-                            src='https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?auto=format&fit=crop&w=1400&q=85'
+                            src='https://images.pexels.com/photos/24245751/pexels-photo-24245751.jpeg'
                             alt='banner image'
                             height={660}
                             width={660}
